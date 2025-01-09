@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.match1.mapper.Mapper">
+    <update id="updateItem">
+        update hardware.item set name = #{name}, image = #{image}, location = #{location} , msg = #{msg} where id = #{id}
+    </update>
+    <update id="setUser">
+        update hardware.user set name = #{name},gender = #{gender},image = #{image},email = #{email}
+    </update>
+    <update id="updateItemSelectByName">update hardware.item set msg = #{msg} where identify = #{identify}</update>
+    <update id="updateItemStatusSelectByName">
+        update hardware.item set status = #{status} where identify = #{identify}
+    </update>
+    <delete id="deleteItem">
+        delete from hardware.item where id = #{id}
+    </delete>
+    <select id="selectMsgByUUID" resultType="java.lang.String">
+        select msg from hardware.hardware where uuid = #{uuid}
+    </select>
+    <select id="getMsgByUUID" resultType="java.lang.String"></select>
+    <select id="getItem" resultType="com.match1.pojo.Item">
+        select * from hardware.item;
+    </select>
+
+    <select id="selectByUsername" resultType="com.match1.pojo.User">
+        select * from hardware where username = #{username}
+    </select>
+    <select id="selectByName" resultType="com.match1.pojo.User">
+        select * from hardware.user where name = #{name}
+    </select>
+
+    <select id="selectByFunction" resultType="com.match1.pojo.Item">
+        select * from hardware.item where ability = #{ability}
+    </select>
+    <select id="getItemByIdentify" resultType="java.lang.String">
+        select msg from hardware.item where identify = #{identify}
+    </select>
+    <select id="getFixItemList" resultType="com.match1.pojo.Item">
+        select  * from hardware.item where status = '报修中'
+    </select>
+    <select id="getUserByName" resultType="com.match1.pojo.User">
+        select * from hardware.user where name = #{name}
+    </select>
+    <insert id="saveMessage">
+        insert into hardware.hardware (uuid,msg) values (#{uuid},#{msg})
+    </insert>
+    <insert id="addItem">
+        insert into hardware.item (name,image,location,msg) values (#{name},#{image},#{location},#{msg})
+    </insert>
+    <insert id="register">
+        insert into hardware.user (username,password) values (#{username},#{password})
+    </insert>
+    <insert id="addUser">
+        insert into hardware.user (username,password,name,gender,image,email) values (#{username},#{password},#{name},#{gender},#{image},#{email})
+    </insert>
+    <insert id="fixItem">
+        insert into hardware.fix (image,location,itemName,no,status) values (#{image},#{location},#{itemName},#{no},#{status})
+    </insert>
+    <insert id="save">insert into hardware.msg (msg) values #{msg}</insert>
+</mapper>
